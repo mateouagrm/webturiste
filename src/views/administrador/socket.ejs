@@ -1,0 +1,96 @@
+<% include ../layouts/header %>
+
+
+
+    <section class="content-header">
+        <h4>
+            Mostrar Mapa
+        </h4>
+    </section>
+
+     <section class="content">
+        <div class="box">
+            <div class="box-header">
+             ver mapas
+            </div>
+            <div class="box-body">
+                <div id="map" >
+                        <h3 class="form-control btn-info" onclick="initMaps()">  click en este cuadro </h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFVmAfeLqztTq_UehyrHBZYxMWliHzRq4&callback=initMaps"
+  type="text/javascript"></script>
+<script>
+  var markers = [];
+  var coordenadas = null;
+  var id_conductor = 1;
+    var socket = io.connect('http://192.168.0.19:3000', { 'forceNew': true });
+    console.log(socket)
+    socket.on('coordenadas', function(data,usuario) {
+          makeMarkerUser(data,usuario);
+    });
+    var santaCruz = {lat: -17.820662, lng: -63.132541};
+
+    function initMaps() {
+         map = new google.maps.Map(document.getElementById('map'), {zoom: 14, center: santaCruz});
+    }
+
+    function makeMarkerUser(data,usuario) {
+
+      if (localStorage.getItem(usuario.id) != null ) {
+        console.log(data)
+        var data1 = localStorage.getItem(usuario.id);
+        
+        if (localStorage.getItem(usuario.id) == "disponible") {
+            var iconAuto = "https://image.ibb.co/fm5QOV/automobile-2.png";
+            console.log(data1);
+        } else {
+          var iconAuto = "https://image.ibb.co/j8PGxq/automobile-1.png";
+          console.log(data1)
+        }
+      }else{
+        localStorage.setItem(usuario.id, 'disponible');
+        var data2 = localStorage.getItem(usuario.id);
+        console.log("else: "+data2)
+        var iconAuto = "https://image.ibb.co/fm5QOV/automobile-2.png";
+      }
+    
+        console.log(data)
+        if (!markers[usuario.id]) {
+
+          markers[usuario.id] = new google.maps.Marker({
+            position: new google.maps.LatLng(data.lat, data.lng),
+            icon : iconAuto
+          });
+          markers[usuario.id].setMap(map);
+          obtenerIdAuto(usuario.id);
+          console.log("dentro del if aqui solo llega 1 sola ves")
+        }else{
+          markers[usuario.id].setPosition(data);  
+        }
+    }
+
+    function obtenerIdAuto(id){
+      $.get("/obtenerIdAuto/"+id, function(auto){
+        const info = {
+          id_conductor: id,
+          id_auto: auto.id
+        }
+
+        markers[id].id = info;
+      });
+
+       google.maps.event.addListener(markers[id], 'click', function(w) {
+             console.log(markers[id]['id'])
+       });
+    }
+
+
+
+</script>
+<% include ../layouts/footer %> 

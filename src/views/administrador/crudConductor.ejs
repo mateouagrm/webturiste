@@ -1,0 +1,73 @@
+<% include ../layouts/header %>
+
+
+<div class="container">
+    <section class="content-header">
+        <h4>
+            Gestionar Conductores
+        </h4>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li class="active">Gestor Conductor</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="box">
+            <div class="box-header">
+             <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarRecomendado">
+                    Agregar Conductor 
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+             </button>
+             
+<!--===========================================================
+	MODAL PARA AGREGAR CONDUCTOR
+============================================================-->
+             <% include ../modals/modalAgregarConductor %>
+            </div>
+            
+
+            <div class="box-body table-responsive">
+                <table class="table table-bordered table-striped dt-responsive tablaProductos" width="100%">
+                    <thead>
+                    <tr>
+                        <th style="width:10px">#</th>
+                        <th>CI</th>
+                        <th>NOMBRE</th>
+                        <th>APELLIDO</th>
+                        <th>TELEFONO</th>
+                        <th>DIRECCION</th>
+                        <th>EMAIL</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% if (data) { -%>
+                            <% for (var i = 0; i < data.length; i++) { -%>
+                                <tr >
+                                    <td> <%= data[i].id %> </td>
+                                    <td> <%= data[i].ci %> </td>
+                                    <td> <%= data[i].nombre %> </td>
+                                    <td> <%= data[i].apellido %> </td>
+                                    <td> <%= data[i].telefono %> </td>
+                                    <td> <%= data[i].direccion %> </td>
+                                    <td> <%= data[i].email %> </td>
+                                    <td> 
+                                            <a href="#" class="btn btn-success">editar</a>
+
+                                             <a href="#" class="btn btn-danger">eliminar</a>
+                                        
+                                        
+                                    </td>
+                                </tr>
+                            <% } -%>
+                        <% } -%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<% include ../layouts/footer %> 

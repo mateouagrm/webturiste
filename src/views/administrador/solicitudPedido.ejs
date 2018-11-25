@@ -1,0 +1,70 @@
+<% include ../layouts/header %>
+
+
+<div class="container">
+    <section class="content-header">
+        <h4>
+            Lista de Solicitudes
+        </h4>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li class="active">Lista de Solicitudes</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="box">
+            
+            <div class="box-body table-responsive">
+                <table class="table table-bordered table-striped dt-responsive tablaProductos" width="100%">
+                    <thead>
+                    <tr>
+                        <th style="width:10px">#</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Lat Origen</th>
+                        <th>Lon Origen</th>
+                        <th>Lat Destino</th>
+                        <th>Lon Destino</th>
+                        <th>Estado</th>
+                        <th>id Cliente</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    	<% if (data) { -%>
+			          		<% for (var i = 0; i < data.length; i++) { -%>
+			          			<tr >
+			          				<td> <%= data[i].id %> </td>
+			          				<td> <%= data[i].fecha %> </td>
+			          				<td> <%= data[i].hora %> </td>
+			          				<td> <%= data[i].lat_origen %> </td>
+			          				<td> <%= data[i].lon_origen %> </td>
+			          				<td> <%= data[i].lat_destino %> </td>
+			          				<td> <%= data[i].lon_destino %> </td>
+			          				<td> <%= data[i].estado %> </td>
+			          				<td> <%= data[i].id_cliente %> </td>
+			          				<td> 
+			          					<% if (data[i].estado == "aceptado") { -%>
+			          						<a href="#" class="btn btn-success">Atendido</a>	
+			          					<% } -%>
+			          					<% if (data[i].estado == "finalizado") { -%>
+			          						<a href="#" class="btn btn-danger">Finalizado</a>	
+			          					<% } -%>
+			          					<% if (data[i].estado == "enviado") { -%>
+			          						<a href="/asignar/<%= data[i].id %>" class="btn btn-info">Atender</a>
+			          					<% } -%>
+			          					
+			          				</td>
+			          			</tr>
+			          		<% } -%>
+			          	<% } -%>
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+<% include ../layouts/footer %> 

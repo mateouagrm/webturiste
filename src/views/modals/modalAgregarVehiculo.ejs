@@ -1,0 +1,93 @@
+<div id="modalAgregarVehiculo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+           <form action="/registrarVehiculo" method="post" enctype="multipart/form-data">
+            <!--=====================================
+            CABEZA DEL MODAL
+           ======================================-->
+            <div class="modal-header" style="background:#3c8dbc; color:white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Agregar Vehiculo</h4>
+            </div>
+            <!--=====================================
+            CUERPO DEL MODAL
+            ======================================-->
+            <div class="modal-body">
+                <div class="box-body">
+                    <!--=====================================
+                         ID CONDUCTOR
+                     ======================================-->
+                    <div class="form-group" >
+                       <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+                          <select class="form-control input-lg seleccionarConductor">
+                          </select>
+                        </div>
+                    </div>
+                    <!--=====================================
+                         ENTRADA PARA EL PLACA
+                     ======================================-->
+                    <div class="form-group">  
+                        <div class="input-group">
+                            <span class="input-group-addon"> 
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input type="text" class="form-control" id="placa" name="placa" placeholder="placa...">
+                        </div>
+                    </div>
+                    <!--=====================================
+                         ENTRADA PARA EL MODELO
+                     ======================================-->
+                    <div class="form-group">  
+                        <div class="input-group">
+                            <span class="input-group-addon"> 
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input type="number" class="form-control" id="modelo" name="modelo" placeholder="modelo...">
+                        </div>
+                    </div>
+                    <!--=====================================
+                         ENTRADA PARA EL MARCA
+                     ======================================-->
+                    <div class="form-group">  
+                        <div class="input-group">
+                            <span class="input-group-addon"> 
+                                <i class="glyphicon glyphicon-phone"></i>
+                            </span>
+                            <input type="text" class="form-control" id="marca" name="marca" placeholder="marca...">
+                        </div>
+                    </div>
+                    <!--=====================================
+                         ENTRADA PARA LA COLOR
+                     ======================================-->
+                    <div class="form-group">  
+                        <div class="input-group">
+                            <span class="input-group-addon"> 
+                                <i class="glyphicon glyphicon-home"></i>
+                            </span>
+                            <input type="text" class="form-control" id="color" name="color" placeholder="color...">
+                        </div>
+                    </div>
+               
+                     <!--=====================================
+                        AGREGAR FOTO DE PORTADA
+                      ======================================-->
+                        <div class="form-group">
+                          <div class="panel">SUBIR FOTO PORTADA</div>
+                             <input type="file" class="fotoPortada" name="foto" id="foto">
+                          <p class="help-block">Tamaño recomendado 1280px * 720px <br> Peso máximo de la foto 2MB</p>
+                            <img src="http://www.todoautos.com.pe/portal/images/stories/noticias/byd-f3-taxi-peru.jpg" class="img-thumbnail previsualizarPortada" width="100%">
+                        </div>
+                </div>
+            </div>
+            <!--=====================================
+            PIE DEL MODAL
+            ======================================-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Salir</button>
+                <input type="submit" class="btn btn-primary" value="Guardar Vehiculo"> <i class="glyphicon glyphicon-floppy-disk"></i>
+            </div>
+         </form>
+        </div>
+    </div>
+</div>

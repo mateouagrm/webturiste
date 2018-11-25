@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MyTurista S.R.L.</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/css/plugins/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/plugins/flexslider.css">
+    <link rel="stylesheet" href="/css/AdminLTE.css">
+    <link rel="stylesheet" href="/css/plantilla.css">
+    <link rel="stylesheet" href="/css/cabezote.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/slide.css">
+    <link rel="stylesheet" href="/css/productos.css">
+    <link rel="stylesheet" href="/css/infoproducto.css">
+    <link rel="stylesheet" href="/css/pedidos.css">
+    <link rel="shortcut icon" type="image/ico" href="/img/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
+
+    <script src="/js/plugins/jquery.min.js"></script>
+</head>
+<style>
+      #map {
+        height: 90vh;
+        width: 100%;  
+       }
+    </style>
+<body>
+<div class="container-fluid barraSuperior" id="top">
+    <div class="container">
+        <div class="row">
+            <!--=====================================
+            SOCIAL
+            ======================================-->
+            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 social">
+                <ul>
+                    <li>
+                        <a href="http://facebook.com/" target="_blank">
+                            <i class="fa fa-facebook redSocial facebookBlanco" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://youtube.com/" target="_blank">
+                            <i class="fa fa-youtube redSocial youtubeBlanco" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://twitter.com/" target="_blank">
+                            <i class="fa fa-twitter redSocial twitterBlanco" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://instagram.com/" target="_blank">
+                            <i class="fa fa-instagram redSocial instagramBlanco" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/" >
+                         <span>Lista Solicitud</span>
+                        </a>
+                    </li>
+                     <li>|</li>
+                     <li>
+                        <a href="/gestionarConductor" >
+                         <span>Gestionar Conductor</span>
+                        </a>
+                    </li>
+                    <li>|</li>
+                     <li>
+                        <a href="/gestionarVehiculo" >
+                         <span>Gestionar Vehiculo</span>
+                        </a>
+                    </li>
+                    <li>|</li>
+                     <li>
+                        <a href="/socket" >
+                         <span>Vehiculos</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 registro">
+                
+            <!--=====================================
+            REGISTRO
+            ======================================-->    
+                <ul>
+                    <li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
+                    <li>|</li>
+                    <li><a href="#modalRegistro" data-toggle="modal">Crear una cuenta</a></li>
+                </ul>
+            </div>
+            <% include ../modals/login %>
+            <% include ../modals/register %>
+        </div>
+    </div>
+</div>
+
+
+<!--=====================================
+HEADER
+======================================-->
+<header class="container-fluid"> 
+    <div class="container">
+        <div class="row" id="cabezote">
+            <!--=====================================
+            LOGOTIPO
+            ======================================-->
+            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="logotipo">
+                <a href="/">
+                    <img src="/img/myTurista.png" class="img-responsive">
+                </a>
+            </div>
+            <!--=====================================
+            BLOQUE CATEGORÍAS Y BUSCADOR
+            ======================================-->
+            <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+                <!--=====================================
+                BUSCADOR
+                ======================================-->
+                <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="buscador">
+                    <input type="search" name="buscar" class="form-control" placeholder="Buscar...">
+                    <span class="input-group-btn">
+                        <a href="#">
+                            <button class="btn btn-default backColor" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <!--=====================================
+            NOTIFICACION
+            ======================================-->
+            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="carrito">
+                <a href="/solicitud" class="actualizarNotificaciones">
+                    <button class="btn btn-default pull-left backColor">
+                        <i class="fa fa-bell" aria-hidden="true"></i>
+                    </button>
+                </a>
+                <p>Notificacion<span class="cantidadCesta"></span> <br> cantidad <span class="sumaCesta"> 0 </span></p>
+            </div>
+        </div>
+    </div>
+</header>
+

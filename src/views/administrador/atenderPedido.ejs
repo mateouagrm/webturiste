@@ -1,0 +1,202 @@
+<% include ../layouts/header %>
+
+  <section class="content-header">
+    <h1>
+      Asignacion de conductor <%= data.id %>
+    </h1>
+  </section>
+  <section class="content">
+	<div class="row">
+		<div class="col-md-8">
+			<div class="box">
+		      <div class="box-header with-border">
+		  			<h4>Ubicacion del cliente y de los moviles libres</h4>
+		      </div>
+		      <div class="box-body">
+					<div id="map" >
+						<h3 class="form-control btn-info" onclick="initMaps()">  click en este cuadro </h3>
+					</div>
+		      </div>
+		    </div>		
+		</div>
+		<div class="col-md-4">
+			<form action="/registrarpedido" method="post" onsubmit="return actualizarSesion()">
+				<div class="row">
+						<div class="box">
+					      <div class="box-header with-border">
+					  			<h4>datos Conductor</h4>
+					      </div>
+					      <div class="box-body">
+						
+				                <div class="form-group">
+				                    <div class="input-group">  
+				                        <span class="input-group-addon">   
+				                            <i class="glyphicon glyphicon-envelope"></i>
+				                        </span>
+				                        <input type="text" class="form-control" id="id_conductor" name="id_conductor" value="" placeholder="id conductor" readonly="readonly">
+				                    </div>
+				                </div>
+					      </div>
+					    </div>	
+				</div>
+
+				<div class="row">
+						<div class="box">
+					      <div class="box-header with-border">
+					  			<h4>datos vehiculo</h4>
+					      </div>
+					      <div class="box-body">
+								<div class="form-group">
+				                    <div class="input-group">  
+				                        <span class="input-group-addon">   
+				                            <i class="glyphicon glyphicon-envelope"></i>
+				                        </span>
+				                        <input type="text" class="form-control" id="id_vehiculo" name="id_vehiculo" value="" placeholder="id vehiculo" readonly="readonly">
+				                    </div>
+				                </div>
+					      </div>
+					    </div>	
+				</div>
+
+				<div class="row">
+					<div class="box">
+					    <div class="box-header with-border">
+					  			<h4>datos Cliente</h4>
+					    </div>
+					     	<div class="box-body">
+
+					     		 <div class="form-group">
+				                    <div class="input-group">  
+				                        <span class="input-group-addon">   
+				                            <i class="glyphicon glyphicon-envelope"></i>
+				                        </span>
+				                        <input type="email" class="form-control" value="<%= data.email %>" readonly="readonly">
+				                    </div>
+				                </div>
+							
+				                        <input type="text" class="form-control ocultarinput" name="id_solicitud" value="<%= data.id %>" readonly="readonly">
+				                        <input type="text" class="form-control ocultarinput" name="fecha" value="<%= data.fecha %>" readonly="readonly">
+				                        <input type="text" class="form-control ocultarinput" name="hora" value="<%= data.hora %>" readonly="readonly">
+				                        <input type="text" class="form-control ocultarinput" name="lat_origen" value="<%= data.lat_origen %>" readonly="readonly">
+				                        <input type="text" class="form-control ocultarinput" name="lon_origen" value="<%= data.lon_origen %>" readonly="readonly">
+				                        <input type="text" class="form-control ocultarinput" name="lat_destino" value="<%= data.lat_destino %>" readonly="readonly">
+				                        <input type="text" class="form-control ocultarinput" name="lon_destino" value="<%= data.lon_destino %>" readonly="readonly">
+				                        <input type="text" class="form-control ocultarinput" name="estado" value="proceso" readonly="readonly">
+				                <div class="form-group">
+				                    <div class="input-group">  
+				                        <span class="input-group-addon">   
+				                            <i class="glyphicon glyphicon-save"></i>
+				                        </span>
+				                        <input type="submit" class="form-control btn btn-success"  value="Guardar" >
+				                    </div>
+				                </div>
+					   		</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+    
+
+  </section>
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFVmAfeLqztTq_UehyrHBZYxMWliHzRq4&callback=initMaps"
+  type="text/javascript"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+  <script>
+	
+
+actualizarSesion = () => {
+	var id_conductor = $('#id_conductor').val();
+	localStorage.setItem(id_conductor, 'ocupado');
+	return true;
+}
+
+
+  var socket = io.connect('http://192.168.0.19:3000', { 'forceNew': true });
+  socket.on('coordenadas', function(data,usuario) {
+          makeMarkerUser(data,usuario);
+    });
+/*CORDENADAS DEL CLIENTE SU ORIGEN Y DESTINO*/
+  var santaCruz = {lat: -17.820662, lng: -63.132541};
+  var cliente_destino = {lat: <%= data.lat_destino %>, lng: <%= data.lon_destino %>};
+  var cliente_origen = {lat: <%= data.lat_origen %>, lng: <%= data.lon_origen %>};
+
+  /*ICONOS PARA QUE SE MUESTRE EN MAPA*/
+  const image_cliente = "https://image.ibb.co/bvZh2q/cliente-origen.png";
+  const image_cliente_destino = "https://image.ibb.co/j3rjFA/location.png";
+  
+/*VALORES ESTATICOS*/
+var markers = [];
+var map;
+
+	function initMaps() {
+ map = new google.maps.Map(document.getElementById('map'), {zoom: 14, center: cliente_origen});
+
+   var marker = new google.maps.Marker({
+          map: map,
+          position: cliente_origen,
+          icon: image_cliente, 
+          title: 'Cliente Origen'
+        });
+   var marker = new google.maps.Marker({
+          map: map,
+          position: cliente_destino,
+          icon: image_cliente_destino, 
+          title: 'Cliente Destino'
+        });
+}
+
+function makeMarkerUser(data,usuario) {
+	console.log(data)
+		 console.log(usuario.id)
+
+      if (localStorage.getItem(usuario.id) != null ) {       
+      	console.log("true undefined")
+      	console.log(localStorage.getItem(usuario.id))
+      	console.log(localStorage.getItem('72'))
+        
+        if (localStorage.getItem(usuario.id) == "disponible") {
+            var iconAuto = "https://image.ibb.co/fm5QOV/automobile-2.png";
+        } else {
+          var iconAuto = "https://image.ibb.co/j8PGxq/automobile-1.png";
+        }
+      }else{
+      	console.log("else undefined")
+        localStorage.setItem(usuario.id, 'disponible');
+        var data2 = localStorage.getItem(usuario.id);
+        var iconAuto = "https://image.ibb.co/fm5QOV/automobile-2.png";
+      }
+        if (!markers[usuario.id]) {
+          markers[usuario.id] = new google.maps.Marker({
+            position: new google.maps.LatLng(data.lat, data.lng),
+            icon : iconAuto
+          });
+          markers[usuario.id].setMap(map);
+          obtenerIdAuto(usuario.id);
+        }else{
+          markers[usuario.id].setPosition(data);  
+        }
+    }
+
+    function obtenerIdAuto(id){
+      $.get("/obtenerIdAuto/"+id, function(auto){
+        const info = {
+          id_conductor: id,
+          id_auto: auto.id
+        }
+
+        markers[id].id = info;
+      });
+
+       google.maps.event.addListener(markers[id], 'click', function(w) {
+         $("#id_conductor").val(markers[id]['id'].id_conductor);
+         $("#id_vehiculo").val(markers[id]['id'].id_auto);    
+       });
+    }
+
+    </script>
+<% include ../layouts/footer %>

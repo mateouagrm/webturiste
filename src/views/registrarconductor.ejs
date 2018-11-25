@@ -1,0 +1,159 @@
+<% include layouts/header %>
+
+
+      <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">REGISTRO DEL CONDUCTOR</h1>
+        </div>        
+      </div>
+        <form action="/registrarConductor" method="post" enctype="multipart/form-data">
+      <div class="row">
+          
+       <div class="col-md-2">
+        <h4 class="text-center">conductor</h4>
+<!--===============================
+imagen del conductor
+================================-->        
+        <div class="contenedor">
+          <img src="http://fundacioncarlosslim.org/wp-content/uploads/2017/03/conductor-ejecutivo.jpg" border="1" id="i" alt="foto del conductor" class="imagen" >
+        </div>
+       </div>
+        <div class="col-md-4">
+                <div class="card">
+<!--===============================
+datos personales del conductor
+================================-->        
+                    <div class="card-header">
+                        <h4 class="card-title">datos personales</h4>            
+                    </div>
+                    <div class="card-body">
+
+                          <div class="form-group">
+                            <label for="ci">CI</label>
+                            <input type="text" class="form-control" id="ci" name="ci" placeholder="carnet de identidad...">
+                          </div>
+                        
+                          <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre...">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="apellido">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" name="apellido" placeholder="apellido...">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="telefono...">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="direccion">Direccion</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="direccion...">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="email...">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="foto">Foto</label>
+                             <input  id="f" name="foto" class="form-control" type="file" >
+                          </div>
+
+                    </div>
+                </div>
+            </div>        
+        
+
+            <div class="col-md-4">
+                <div class="card">
+<!--===============================
+datos vehiculo del conductor
+================================-->                          
+                    <div class="card-header">
+                        <h4 class="card-title">datos Vehiculo</h4>            
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <label for="placa">Placa</label>
+                            <input type="text" class="form-control" id="placa" name="placa" placeholder="placa del automovil...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ruat">Ruat</label>
+                            <input type="text" class="form-control" id="ruat" name="ruat" placeholder="ruat del automovil...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modelo">Modelo</label>
+                            <input type="text" class="form-control" id="modelo" name="modelo" placeholder="modelo del automovil...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="marca">Marca</label>
+                            <input type="text" class="form-control" id="marca" name="marca" placeholder="marca del automovil...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color">Color</label>
+                            <input type="text" class="form-control" id="color" name="color" placeholder="color del automovil...">
+                        </div>
+
+                         <div class="form-group">
+                            <label for="fotomovil">Foto</label>
+                            <input  id="g" name="fotomovil" class="form-control" type="file" >
+                        </div>
+
+                        <input type="submit"  class="btn btn-primary mb-2" value="Registrar datos del conductor">
+
+
+                    </div>
+                </div>
+            </div>  
+<!--===============================
+imagen del vehiculo
+================================-->                                    
+              <div class="col-md-2">
+                <h4 class="text-center">vehiculo</h4>
+                <div class="contenedor">        
+                  <img src="https://i.ytimg.com/vi/eNLiP0P9guE/maxresdefault.jpg" id="j" border="1" alt="foto del conductor" class="imagen" >
+                </div>
+              </div>
+            </div>
+          </form>
+    
+ 
+<script>
+/*===============================
+script para la imagen del conductor
+================================*/
+    $('#f').on('change',function(ev){
+           var f =ev.target.files[0];
+           var fr = new FileReader();
+           fr.onload = function(ev2){
+            console.dir(ev2);
+             $('#i').attr('src',ev2.target.result);
+           };
+           fr.readAsDataURL(f);          
+    });
+
+/*===============================
+script para la imagen del vehiculo
+================================*/
+    $('#g').on('change',function(ev){
+           var f =ev.target.files[0];
+           var fr = new FileReader();
+           fr.onload = function(ev2){
+            console.dir(ev2);
+             $('#j').attr('src',ev2.target.result);
+           };
+           fr.readAsDataURL(f);
+    });
+</script>
+
+
+<% include layouts/footer %> 
